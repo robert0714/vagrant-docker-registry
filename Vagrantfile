@@ -6,8 +6,7 @@ Vagrant.configure(2) do |config|
     config.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=700,fmode=600"]
   else
     config.vm.synced_folder ".", "/vagrant"
-  end
-  
+  end  
   config.vm.define :reg, primary: true do |reg|
 #    reg.vm.network :forwarded_port, host: 8080, guest: 8080
 #    reg.vm.network :forwarded_port, host: 5000, guest: 5000
