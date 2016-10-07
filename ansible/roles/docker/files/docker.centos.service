@@ -7,7 +7,7 @@ After=network.target
 
 [Service]
 Type=notify
-ExecStart=/usr/bin/dockerd   -H tcp://0.0.0.0:2375  --insecure-registry 192.168.57.29:5000 
+ExecStart=/usr/bin/dockerd   -H tcp://0.0.0.0:2375   
 ExecReload=/bin/kill -s HUP $MAINPID
 
 
