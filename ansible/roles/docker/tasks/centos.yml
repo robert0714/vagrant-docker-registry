@@ -1,0 +1,68 @@
+- name: CentOS dirctory are copied
+  file: path=/etc/docker state=directory mode=0755
+  ignore_errors: yes
+  tags: [docker]
+
+- name: CentOS files are copied
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items: centos_files
+  tags: [docker]
+
+me: CentOS package is installed
+  yum:
+    name: docker-engine
+    state: present
+  tags: [docker]
+
+- name: python-pip is present
+  yum:
+    name: python-pip
+    state: present
+  tags: [docker]
+
+- name: docker-py is present
+  pip:
+    name: docker-py
+    version: 1.10.3
+    state: present
+  tags: [docker]
+  
+- name: Docker Debian files are present
+  template:
+    src: "{{ docker_cfg }}"
+    dest: "{{ docker_cfg_dest }}"
+  register: copy_result
+  tags: [docker]
+
+- name: CentOS Daemon is reloaded
+  command: systemctl daemon-reload
+  tags: [docker]
+
+- name: vagrant user is added to the docker group
+  user:
+    name: vagrant
+    group: docker
+  register: user_result
+  tags: [docker]
+
+- name: DockerUI is running
+  docker:
+    image: uifd/ui-for-docker
+    name: dockerui
+    ports: 9000:9000
+    privileged: yes
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  when: not skip_ui is defined
+  ignore_errors: yes
+  tags: [docker]
+
+- name: Centos Docker service is restarted
+  service:
+    name: docker
+    state: restarted
+  when: copy_result|changed or user_result|changed
+  tags: [docker]
+
