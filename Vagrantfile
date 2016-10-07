@@ -7,7 +7,9 @@ Vagrant.configure(2) do |config|
   else
     config.vm.synced_folder ".", "/vagrant"
   end  
-  config.vm.define :reg, primary: true do |reg|
+  config.vm.define "reg"  do |reg|
+    reg.vm.box = "bento/centos-7.2" 
+    reg.vm.hostname = "reg"
 #    reg.vm.network :forwarded_port, host: 8080, guest: 8080
 #    reg.vm.network :forwarded_port, host: 5000, guest: 5000
 #    reg.vm.network :forwarded_port, host: 2201, guest: 22, id: "ssh", auto_correct: true
@@ -22,5 +24,10 @@ Vagrant.configure(2) do |config|
   end
   if Vagrant.has_plugin?("vagrant-cachier")
     config.cache.scope = :box
+  end
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vbguest.auto_update = false
+    config.vbguest.no_install = true
+    config.vbguest.no_remote = true
   end
 end
