@@ -10,7 +10,7 @@
   with_items: centos_files
   tags: [docker]
 
-me: CentOS package is installed
+- name: CentOS package is installed
   yum:
     name: docker-engine
     state: present
