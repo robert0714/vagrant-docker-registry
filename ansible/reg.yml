@@ -6,4 +6,4 @@
     - docker
     - registry
     - cadvisor 
-    - manage-images 
+#    - manage-images 
