@@ -5,4 +5,5 @@
     - centos   
     - docker
     - registry
-    - cadvisor    
+    - cadvisor 
+    - manage-images 
