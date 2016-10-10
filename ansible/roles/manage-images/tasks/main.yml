@@ -3,7 +3,8 @@
     name: vfarcic/books-fe-polymer-dev
     repository: 192.168.57.29:5000/books-fe-polymer-dev
     tag: 1
-    push: yes   
+    pull: yes 
+#   push: yes  
   tags: [manage-images]
 
 - name: Tag and push to local registry [books-fe-polymer]
@@ -11,7 +12,8 @@
     name: vfarcic/books-fe-polymer-dev
     repository: 192.168.57.29:5000/books-fe-polymer
     tag: 1
-    push: yes   
+    pull: yes 
+#   push: yes  
   tags: [manage-images]
 
 - name: Tag and push to local registry [books-service]
@@ -19,7 +21,8 @@
     name: vfarcic/books-service
     repository: 192.168.57.29:5000/books-service
     tag: 1
-    push: yes   
+    pull: yes
+#   push: yes   
   tags: [manage-images]
 
 - name: Tag and push to local registry [books-service-tests]
@@ -27,6 +30,7 @@
     name: vfarcic/books-service-tests
     repository: 192.168.57.29:5000/books-service-tests
     tag: 1
-    push: yes   
+    pull: yes
+#   push: yes   
   tags: [manage-images]
  
