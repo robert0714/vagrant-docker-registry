@@ -1,3 +1,1 @@
 registry_host_dir: /vagrant/registry
-docker_cfg_dest: /etc/sysconfig/docker
-docker_cfg: docker.cfg
