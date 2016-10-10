@@ -1,6 +1,6 @@
 - name: Container is running
   docker:
-    image: google/cadvisor
+    image: google/cadvisor:v0.23.8
     name: cadvisor
     privileged: yes
     volumes:
