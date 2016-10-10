@@ -28,13 +28,7 @@
     version: 1.10.3
     state: present
   tags: [docker]
-  
-- name: Docker Debian files are present
-  template:
-    src: "{{ docker_cfg }}"
-    dest: "{{ docker_cfg_dest }}"
-  register: copy_result
-  tags: [docker-centos]
+ 
   
 - name: CentOS Daemon is reloaded
   command: systemctl daemon-reload
