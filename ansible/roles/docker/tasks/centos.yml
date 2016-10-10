@@ -46,7 +46,13 @@
     group: docker
   register: user_result
   tags: [docker]
-
+  
+- name: CentOS service is running
+  service:
+    name: docker
+    state: running
+  tags: [docker]
+  
 - name: DockerUI is running
   docker:
     image: uifd/ui-for-docker
@@ -57,12 +63,5 @@
       - /var/run/docker.sock:/var/run/docker.sock
   when: not skip_ui is defined
   ignore_errors: yes
-  tags: [docker]
-
-- name: Centos Docker service is restarted
-  service:
-    name: docker
-    state: restarted
-  when: copy_result|changed or user_result|changed
   tags: [docker]
 
