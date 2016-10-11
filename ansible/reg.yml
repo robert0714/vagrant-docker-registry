@@ -5,5 +5,5 @@
     - centos   
     - docker
     - registry
-    - cadvisor 
-#    - manage-images 
+#不穩定    - cadvisor 
+#Ansible2.2以後才對CentoS支援    - manage-images 
