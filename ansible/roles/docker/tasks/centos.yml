@@ -25,7 +25,7 @@
 - name: docker-py is present
   pip:
     name: docker-py
-    version: 1.7.0
+    version: 1.10.5
     state: present
   tags: [docker]
  
