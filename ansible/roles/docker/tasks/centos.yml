@@ -7,7 +7,19 @@
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-  with_items: "{{ centos_files }}"
+  with_items: "{{  centos_files }}"
+  tags: [docker]
+
+   
+- name: add repository
+  yum_repository:
+    name: dockerrepo
+    description: Docker Repository
+    baseurl: https://yum.dockerproject.org/repo/main/centos/7/
+    gpgkey: https://yum.dockerproject.org/gpg
+    enabled: 1
+    gpgcheck: 1
+  ignore_errors: yes
   tags: [docker]
 
 - name: CentOS package is installed
@@ -28,10 +40,17 @@
     version: 1.10.5
     state: present
   tags: [docker]
- 
-  
-- name: CentOS Daemon is reloaded
+
+- name: CentOS files are present
+  template:
+    src: "{{ centos_docker_cfg }}"
+    dest: "{{ centos_docker_cfg_dest }}"
+  register: copy_result
+  tags: [docker]
+
+- name: Centos Daemon is reloaded
   command: systemctl daemon-reload
+  when: copy_result|changed and is_systemd is defined
   tags: [docker]
 
 - name: vagrant user is added to the docker group
@@ -40,15 +59,16 @@
     group: docker
   register: user_result
   tags: [docker]
-  
-- name: CentOS service is running
+
+- name: Centos Docker service is restarted
   service:
     name: docker
-    state: running
+    state: restarted
+  when: copy_result|changed or user_result|changed
   tags: [docker]
-  
+
 - name: DockerUI is running
-  docker:
+  docker_container:
     image: uifd/ui-for-docker
     name: dockerui
     ports: 9000:9000
@@ -59,3 +79,8 @@
   ignore_errors: yes
   tags: [docker]
 
+- name: CentOS service is running
+  service:
+    name: docker
+    state: running
+  tags: [docker]

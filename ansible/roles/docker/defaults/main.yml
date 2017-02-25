@@ -2,6 +2,6 @@
 
   centos_files: [
      { src: "docker.centos.repo", dest: "/etc/yum.repos.d/docker.repo" },
-     { src: "docker.centos.service", dest: "/lib/systemd/system/docker.service" },
-     { src: "daemon.json", dest: "/etc/docker/daemon.json" }
+#     { src: "docker.centos.service", dest: "/lib/systemd/system/docker.service" },
+     { src: "daemon.json", dest: "/etc/docker/daemon.json" },
   ]

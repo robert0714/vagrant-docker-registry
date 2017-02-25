@@ -2,7 +2,7 @@
   remote_user: vagrant
   sudo: yes
   roles:
-    - centos   
+    - common 
     - docker
     - registry
 #不穩定    - cadvisor 

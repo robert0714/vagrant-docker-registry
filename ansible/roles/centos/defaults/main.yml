@@ -1,3 +1,0 @@
-centos_files: [
-     { src: "centos.sshd_config", dest: "/etc/ssh/sshd_config" },
-  ]
