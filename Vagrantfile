@@ -17,7 +17,8 @@ Vagrant.configure(2) do |config|
     reg.vm.network "public_network", bridge: "eno4", ip: "192.168.57.29", netmask: "255.255.255.0" , gateway: "192.168.57.1"
     reg.vm.provision "shell", path: "bootstrap.sh"
     reg.vm.provision :shell, inline: 'ansible-playbook /vagrant/ansible/reg.yml -c local -v'
-    reg.vm.provision :shell , inline: "systemctl restart network"
+    reg.vm.provision :shell , inline: "sudo systemctl restart network"
+#sudo ifup enp0s8
     reg.vm.hostname = "reg"
     reg.vm.provider "virtualbox" do |v|
       v.memory = 2048
