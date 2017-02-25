@@ -18,8 +18,8 @@ else
       echo "Ansible is not installed."
       yum install -y wget
       wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
-      rpm -ivh  epel-release-7-8.noarch.rpm
-      rm -rf epel-release-7-8.noarch.rpm
+      rpm -ivh  epel-release-7-9.noarch.rpm
+      rm -rf epel-release-7-9.noarch.rpm
       
 fi
 
