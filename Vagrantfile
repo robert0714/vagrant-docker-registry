@@ -12,12 +12,13 @@ Vagrant.configure(2) do |config|
 #    reg.vm.hostname = "reg"
 #    reg.vm.network :forwarded_port, host: 8080, guest: 8080
 #    reg.vm.network :forwarded_port, host: 5000, guest: 5000
-    reg.vm.network :forwarded_port, host: 2201, guest: 22, id: "ssh", auto_correct: true
+#    reg.vm.network :forwarded_port, host: 2201, guest: 22, id: "ssh", auto_correct: true
 #    reg.vm.network "private_network", ip: "192.168.50.91"
 #    reg.vm.network "public_network", bridge: "eno4", ip: "192.168.57.29", auto_config: "false", netmask: "255.255.255.0" , gateway: "192.168.57.1"
     reg.vm.provision "shell", path: "bootstrap.sh"
     reg.vm.provision :shell, inline: 'ansible-playbook /vagrant/ansible/reg.yml -c local -v'
     reg.vm.hostname = "reg"
+    reg.vm.provision :shell , inline: "systemctl restart network"
     reg.vm.provider "virtualbox" do |v|
       v.memory = 2048
     end
