@@ -1,3 +1,4 @@
+.vagrant/
 ansible/reg.retry
 registry-mirror/
 registry/
