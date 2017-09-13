@@ -13,8 +13,8 @@ Vagrant.configure(2) do |config|
     default_router = "192.168.57.1"
     reg.vm.provision :shell, inline: "ip route delete default 2>&1 >/dev/null || true; ip route add default via #{default_router}" 
 #    reg.vm.provision :shell , inline: "sudo systemctl restart network"
-    reg.vm.provision "shell", path: "bootstrap.sh"
-    reg.vm.provision :shell, inline: 'ansible-playbook /vagrant/ansible/reg.yml -c local -v'    
+    reg.vm.provision :shell, path: "bootstrap.sh"
+    reg.vm.provision :shell, inline: 'PYTHONUNBUFFERED=1  ansible-playbook /vagrant/ansible/reg.yml -c local -v'    
 #sudo ifup enp0s8
     reg.vm.hostname = "reg"
     reg.vm.provider "virtualbox" do |v|
