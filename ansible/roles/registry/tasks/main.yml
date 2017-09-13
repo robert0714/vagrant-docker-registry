@@ -14,9 +14,10 @@
   tags: [registry]
 
 - name: Registry container is running
-  docker:
+  docker_container:
+    restart_policy: always
     name: registry
-    image: registry:2.6.0
+    image: registry:2.6.2
     ports: 5000:5000
     volumes:
       - "{{ registry_host_dir }}:/var/lib/registry/docker/registry"
@@ -24,9 +25,10 @@
   tags: [registry]
 
 - name: Mirror container is running
-  docker:
+  docker_container:
+    restart_policy: always
     name: registry-mirror
-    image: registry:2.6.0
+    image: registry:2.6.2
     ports: 5001:5000
     volumes:
       - "{{ registry_host_dir }}-mirror:/var/lib/registry/docker/registry"
